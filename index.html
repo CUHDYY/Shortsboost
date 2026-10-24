@@ -3,452 +3,641 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b0b0b">
-<title>ShortsBoost | CUHDYY Creator Studio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2563eb">
+<title>ShortsBoost | CUHDYY Studio</title>
 <style>
-:root{--bg:#090909;--panel:#151515;--line:#292929;
---yellow:#ffe000;--muted:#a5a5a5;--white:#fff}
+:root {
+  --blue:#2563eb;--blue2:#1d4ed8;--pale:#eff6ff;
+  --bg:#f4f7fc;--white:#fff;--text:#172033;
+  --muted:#718096;--line:#e3eaf4;--green:#15803d;
+  --shadow:0 5px 22px rgba(30,64,175,.055);
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--white);
-font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-header{position:sticky;top:0;z-index:5;background:#0b0b0bf2;
-border-bottom:1px solid var(--line);padding:15px}
-nav,.wrap{max-width:850px;margin:auto}
-nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:22px;font-weight:900;color:var(--yellow)}
-.sub{font-size:11px;color:var(--muted);margin-top:5px}
-.wrap{padding:22px 14px 50px}
-h1{font-size:30px;line-height:1.15;margin:10px 0}
-h2{font-size:19px;margin:0 0 12px}
-h3{font-size:16px;line-height:1.4}
-p{line-height:1.5}
+a{color:var(--blue)}
+button:focus-visible,input:focus-visible,select:focus-visible,
+textarea:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+.app{min-height:100vh;display:flex}
+.sidebar{width:218px;flex-shrink:0;background:white;
+border-right:1px solid var(--line);padding:22px 13px;
+display:flex;flex-direction:column;gap:25px}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px;
+font-size:19px;font-weight:900;letter-spacing:-.6px}
+.brand-icon{background:var(--blue);color:white;border-radius:11px;
+width:36px;height:36px;display:grid;place-items:center}
+.brand span{color:var(--blue)}
+.navlabel{font-size:10px;letter-spacing:1.4px;font-weight:850;
+color:#94a3b8;padding:0 11px;margin-bottom:8px}
+.nav{display:grid;gap:5px}
+.nav button{border:0;background:transparent;color:#617087;
+text-align:left;padding:12px;border-radius:10px;font-size:12px;
+font-weight:700;display:flex;align-items:center;gap:10px;width:100%}
+.nav button.active{background:var(--pale);color:var(--blue)}
+.nav button:hover{background:#f1f5f9}
+.nav .ico{width:20px;text-align:center;font-size:16px}
+.sidebar-bottom{margin-top:auto}
+.channel{background:#f6f9ff;border:1px solid var(--line);
+border-radius:12px;padding:13px;font-size:12px}
+.channel strong{display:block;margin-bottom:6px}
+.channel p{margin:0;color:var(--muted);line-height:1.6}
+.channel a{text-decoration:none;font-weight:750}
+.main{flex:1;min-width:0}
+.topbar{min-height:68px;background:#ffffffed;border-bottom:1px solid var(--line);
+padding:13px 23px;display:flex;align-items:center;
+justify-content:space-between;gap:12px}
+.topbar h2{font-size:16px;margin:0}
+.topbar p{font-size:11px;color:var(--muted);margin:4px 0 0}
+.topright{display:flex;align-items:center;gap:8px}
+.statuspill{font-size:10px;font-weight:800;color:var(--green);
+background:#eaf8ef;border-radius:30px;padding:8px 10px}
+.content{max-width:1550px;margin:auto;padding:22px;
+display:grid;grid-template-columns:minmax(0,1fr) 285px;
+align-items:start;gap:20px}
+.center{min-width:0}
+.page{display:none}
+.page.active{display:block}
+.hero{padding:25px;border-radius:17px;color:white;
+background:linear-gradient(125deg,#1d4ed8,#3b82f6 70%,#60a5fa);
+position:relative;overflow:hidden}
+.hero:after{content:"▶";position:absolute;right:17px;bottom:-36px;
+font-size:125px;font-weight:900;opacity:.09;pointer-events:none}
+.eyebrow{font-size:10px;font-weight:850;letter-spacing:1.5px;opacity:.85}
+.hero h1{font-size:clamp(26px,3vw,37px);line-height:1.12;
+letter-spacing:-1px;margin:13px 0}
+.hero p{font-size:13px;line-height:1.7;color:#e5efff;
+max-width:480px;margin:0 0 18px}
+h2{font-size:18px;margin:0 0 10px}
+h3{font-size:14px;line-height:1.45;margin:12px 0 8px}
+p{line-height:1.55}
 .muted{color:var(--muted)}
-.small{font-size:12px}
-.panel,.idea{background:var(--panel);border:1px solid var(--line);
-border-radius:14px;padding:15px;margin:14px 0}
-.hero{background:linear-gradient(135deg,#201d07,#121212 65%);
-border:1px solid #4b430b;border-radius:17px;padding:20px}
-.yellow{color:var(--yellow)}
-.row{display:flex;gap:9px;flex-wrap:wrap}
-.field{flex:1;min-width:130px}
-label{display:block;color:var(--muted);font-size:12px;margin:12px 0 7px}
-input,select,textarea{width:100%;min-width:0;background:#202020;
-color:white;border:1px solid #383838;border-radius:9px;padding:12px}
-textarea{min-height:150px;resize:vertical;line-height:1.5}
-.btn{border:0;border-radius:9px;padding:12px 14px;font-weight:800}
-.primary{background:var(--yellow);color:#111}
-.secondary{background:#242424;color:white;border:1px solid #3b3b3b}
+.small{font-size:11px}
+.btn{border:0;border-radius:9px;padding:11px 13px;
+font-size:12px;font-weight:800}
+.primary{background:var(--blue);color:white}
+.primary:hover{background:var(--blue2)}
+.whitebtn{background:white;color:var(--blue2)}
+.whitebtn:hover{background:#edf4ff}
+.soft{background:var(--pale);color:var(--blue)}
+.outline{background:white;border:1px solid var(--line);color:var(--text)}
 .full{width:100%;margin-top:10px}
-.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-gap:7px;margin:18px 0}
-.tab{background:#1a1a1a;border:1px solid #333;color:white;
-border-radius:9px;padding:12px 5px;font-size:12px}
-.tab.active{border-color:var(--yellow);color:var(--yellow)}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.stat{background:#202020;border-radius:10px;padding:12px 8px}
-.stat strong{display:block;color:var(--yellow);font-size:19px}
-.stat span{font-size:10px;color:var(--muted)}
-.ideaTop{display:flex;justify-content:space-between;gap:8px;align-items:start}
-.pill{display:inline-block;font-size:11px;color:var(--yellow);
-background:#332f08;padding:6px 8px;border-radius:20px}
-.score{font-size:21px;font-weight:900;color:var(--yellow)}
-.hook{font-weight:900;font-size:19px;line-height:1.4;margin:14px 0}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.actions button{flex:1;min-width:90px;font-size:12px}
-.result{border-bottom:1px solid var(--line);padding:14px 0}
+.btn:disabled{opacity:.55;cursor:wait}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+gap:10px;margin:16px 0 24px}
+.stat,.card,.panel{background:white;border:1px solid var(--line);
+border-radius:13px;box-shadow:var(--shadow)}
+.stat{padding:13px}
+.stat span{font-size:10px;color:var(--muted);display:block}
+.stat strong{display:block;font-size:22px;margin:7px 0;color:var(--blue)}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;
+gap:10px;margin:22px 0 12px}
+.sectionhead h2{margin:0}
+.field{margin:12px 0}
+label{display:block;font-size:11px;font-weight:750;
+color:#53627a;margin:0 0 7px}
+input,select,textarea{width:100%;min-width:0;background:white;color:var(--text);
+border:1px solid #d8e1ee;border-radius:9px;padding:11px}
+textarea{min-height:135px;resize:vertical;line-height:1.65}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>.field{flex:1;min-width:130px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{padding:15px;min-width:0}
+.tag{display:inline-block;font-size:9px;letter-spacing:.5px;
+font-weight:850;color:var(--blue);background:var(--pale);
+border-radius:5px;padding:5px 7px}
+.card h3{margin:12px 0 7px;font-size:14px}
+.card p{font-size:12px;color:var(--muted);margin:0 0 13px;line-height:1.65}
+.cardactions{display:flex;gap:7px;flex-wrap:wrap}
+.cardactions .btn{padding:8px 10px;font-size:11px}
+.cardactions a{font-size:11px;align-self:center;font-weight:750}
+.panel{padding:16px;margin-bottom:13px;min-width:0}
+.panelhead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panelhead h3{margin:0}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+background:#22c55e;margin-right:5px}
+.result{padding:12px 0;border-bottom:1px solid var(--line)}
 .result:last-child{border:0}
-.result a{color:var(--yellow)}
-.notice{font-size:12px;color:var(--yellow);overflow-wrap:anywhere}
+.result a{font-size:12px;font-weight:750;text-decoration:none;line-height:1.5}
+.result a:hover{text-decoration:underline}
+.meta{font-size:10px;line-height:1.65;color:var(--muted);margin-top:5px}
+.good{color:var(--green);font-weight:800}
+.note{font-size:11px;line-height:1.6;overflow-wrap:anywhere;color:var(--muted)}
+.error{color:#b91c1c}
+.empty{text-align:center;color:var(--muted);font-size:12px;
+line-height:1.7;padding:18px 6px}
 .hidden{display:none!important}
-footer{text-align:center;color:var(--muted);font-size:12px;
-padding:22px;border-top:1px solid var(--line)}
-@media(max-width:400px){
-h1{font-size:27px}.hero,.panel,.idea{padding:12px}
-.tabs{gap:4px}.tab{font-size:11px;padding:11px 3px}
+.divider{height:1px;background:var(--line);margin:13px 0}
+.scriptpreview{white-space:pre-wrap;overflow-wrap:anywhere;
+font-size:12px;line-height:1.8;background:#f8fbff;border:1px solid var(--line);
+padding:14px;border-radius:10px}
+.mobilebar{display:none}
+footer{text-align:center;color:var(--muted);font-size:10px;
+padding:20px;border-top:1px solid var(--line)}
+@media(max-width:1050px){
+.content{grid-template-columns:minmax(0,1fr) 255px;padding:16px;gap:13px}
+.sidebar{width:190px}
+}
+@media(max-width:780px){
+.app{display:block}
+.sidebar{width:100%;padding:12px;border:0;border-bottom:1px solid var(--line);
+gap:12px}
+.brand{padding:0 5px}
+.sidebar .navlabel,.sidebar-bottom{display:none}
+.nav{display:flex;overflow-x:auto;padding-bottom:2px}
+.nav button{white-space:nowrap;width:auto;flex-shrink:0;padding:10px}
+.content{display:flex;flex-direction:column;padding:14px;width:100%;gap:8px}
+.center{width:100%}
+.rightpanel{width:100%;display:grid;grid-template-columns:1fr;gap:0}
+.topbar{padding:13px 15px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hero{padding:20px}
+}
+@media(max-width:420px){
+.hero{padding:16px}
+.hero h1{font-size:27px}
+.grid{grid-template-columns:1fr}
+.stats{gap:7px}
+.stat{padding:10px 8px}
+.stat strong{font-size:19px}
+.topbar{align-items:flex-start}
+.statuspill{font-size:9px;padding:7px}
+.card{padding:13px}
 }
 </style>
 </head>
 <body>
-<header>
-<nav>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">▶</div><div>SHORTS<span>BOOST</span></div></div>
   <div>
-    <div class="logo">⚡ SHORTSBOOST</div>
-    <div class="sub">CREATOR STUDIO · FOR CUHDYY</div>
+    <div class="navlabel">WORKSPACE</div>
+    <div class="nav">
+      <button class="active" data-page="dashboard"><span class="ico">⌂</span>Dashboard</button>
+      <button data-page="ideas"><span class="ico">✦</span>Idea generator</button>
+      <button data-page="popular"><span class="ico">↗</span>Popular ideas</button>
+      <button data-page="live"><span class="ico">◉</span>Live search</button>
+      <button data-page="script"><span class="ico">✎</span>Script studio</button>
+      <button data-page="saved"><span class="ico">♡</span>Saved ideas</button>
+    </div>
   </div>
-  <a href="https://www.youtube.com/@cuhdyy" target="_blank"
-     rel="noopener noreferrer" style="color:#ffe000;font-size:12px">
-     MY CHANNEL ↗
-  </a>
-</nav>
+  <div class="sidebar-bottom">
+    <div class="channel">
+      <strong>YOUR CHANNEL</strong>
+      <p>Roblox documentary Shorts</p>
+      <p style="margin-top:7px"><a href="https://www.youtube.com/@cuhdyy" target="_blank" rel="noopener"> @cuhdyy ↗</a></p>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+<header class="topbar">
+  <div><h2 id="pageTitle">Creator dashboard</h2><p>Roblox research · ideas · scripts</p></div>
+  <div class="topright"><span class="statuspill"><span class="live-dot"></span>CREATOR STUDIO</span></div>
 </header>
 
-<main class="wrap">
-  <section class="hero">
-    <div class="pill">YOUR PERSONAL SHORTS TOOL</div>
-    <h1>Find your next <span class="yellow">viral idea.</span></h1>
-    <p class="muted">Roblox drama. Forgotten secrets. Scary errors.
-    Better hooks. Stronger endings.</p>
-    <p class="small muted" id="edition"></p>
-    <button class="btn primary" onclick="newIdeas()">⚡ Generate ideas</button>
-  </section>
+<div class="content">
+<div class="center">
 
+<section class="page active" id="page-dashboard">
+  <div class="hero">
+    <div class="eyebrow">CUHDYY · ROBLOX DOCUMENTARIES</div>
+    <h1>Find the next <span style="color:#dbeafe">big story.</span></h1>
+    <p>Old Roblox. Lost features. Tix. Mysteries. Alternate timelines. Find real videos to research, then turn your idea into a suspenseful Short.</p>
+    <button class="btn whitebtn" onclick="go('popular')">↗ Find popular topics</button>
+    <button class="btn" style="background:#ffffff25;color:white;margin-left:5px" onclick="go('ideas')">Generate ideas</button>
+  </div>
   <div class="stats">
-    <div class="stat"><strong id="ideaCount">0</strong><span>IDEAS</span></div>
-    <div class="stat"><strong id="savedCount">0</strong><span>SAVED</span></div>
-    <div class="stat"><strong>30–40s</strong><span>TARGET LENGTH</span></div>
+    <div class="stat"><span>IDEAS AVAILABLE</span><strong id="ideaCount">0</strong></div>
+    <div class="stat"><span>SAVED IDEAS</span><strong id="savedCount">0</strong></div>
+    <div class="stat"><span>SCRIPT LENGTH</span><strong>35s</strong></div>
   </div>
-
-  <div class="tabs">
-    <button class="tab active" data-tab="ideas" onclick="switchTab('ideas')">🔥 Ideas</button>
-    <button class="tab" data-tab="live" onclick="switchTab('live')">📡 Live search</button>
-    <button class="tab" data-tab="saved" onclick="switchTab('saved')">♡ Saved</button>
+  <div class="sectionhead"><h2>Start creating</h2></div>
+  <div class="grid">
+    <article class="card"><span class="tag">DISCOVER</span><h3>Popular video ideas</h3><p>Search recent Roblox videos and rank them using real view statistics.</p><button class="btn soft" onclick="go('popular')">Explore topics →</button></article>
+    <article class="card"><span class="tag">CREATE</span><h3>Documentary generator</h3><p>Explore old Roblox, deleted features, mysteries and what-if stories.</p><button class="btn soft" onclick="go('ideas')">Generate ideas →</button></article>
+    <article class="card"><span class="tag">RESEARCH</span><h3>Live YouTube search</h3><p>Find recent videos, open sources and investigate topics.</p><button class="btn soft" onclick="go('live')">Search videos →</button></article>
+    <article class="card"><span class="tag">WRITE</span><h3>Script studio</h3><p>Build a hook, escalating suspense, a reveal and an ending.</p><button class="btn soft" onclick="go('script')">Write a script →</button></article>
   </div>
+  <div class="sectionhead"><h2>Today's documentary ideas</h2><button class="btn soft" onclick="go('ideas')">See all</button></div>
+  <div class="grid" id="dashboardIdeas"></div>
+</section>
 
-  <section id="ideasSection">
-    <h2>Today's ideas for <span class="yellow">@cuhdyy</span></h2>
-    <p class="muted small">Scores are creative estimates, not predictions of actual views.</p>
+<section class="page" id="page-ideas">
+  <div class="sectionhead"><h2>Documentary idea generator</h2></div>
+  <p class="muted small">These are creative suggestions, not live trend measurements.</p>
+  <div class="panel">
     <div class="row">
-      <div class="field">
-        <label for="category">TOPIC TYPE</label>
-        <select id="category" onchange="newIdeas()">
-          <option value="all">All topics</option>
-          <option value="nostalgia">Old Roblox</option>
-          <option value="mystery">Mysteries and errors</option>
-          <option value="drama">Drama and controversies</option>
+      <div class="field"><label for="category">TOPIC CATEGORY</label>
+        <select id="category">
+          <option value="all">All documentary topics</option>
+          <option value="history">Old Roblox & history</option>
           <option value="whatif">What if scenarios</option>
-          <option value="updates">Events and updates</option>
+          <option value="removed">Removed features</option>
+          <option value="mystery">Mysteries & errors</option>
+          <option value="games">Forgotten games</option>
         </select>
       </div>
-      <div class="field">
-        <label for="length">SCRIPT LENGTH</label>
-        <select id="length">
-          <option value="30">30 seconds</option>
-          <option value="35" selected>35 seconds</option>
-          <option value="40">40 seconds</option>
-        </select>
+      <div class="field"><label for="length">SCRIPT LENGTH</label>
+        <select id="length"><option value="30">30 seconds</option><option value="35" selected>35 seconds</option><option value="40">40 seconds</option></select>
       </div>
     </div>
-    <div id="ideasList"></div>
-  </section>
+    <button class="btn primary" onclick="renderIdeaPage()">Generate ideas</button>
+  </div>
+  <div class="grid" id="ideasList"></div>
+</section>
 
-  <section id="liveSection" class="hidden">
-    <h2>📡 Live YouTube research</h2>
-    <p class="muted small">Search recent Roblox videos, check their public views,
-    and discover topics to research for your own Shorts.</p>
-    <div class="panel">
-      <label for="apiKey">YOUR RESTRICTED YOUTUBE API KEY</label>
-      <input id="apiKey" type="password" placeholder="Paste your API key"
-       autocomplete="off">
-      <button class="btn secondary full" onclick="saveKey()">Save key on this device</button>
-      <label for="searchTerm">SEARCH TOPIC</label>
-      <input id="searchTerm" value="Roblox secrets">
-      <label for="period">UPLOAD PERIOD</label>
-      <select id="period">
-        <option value="1">Last 24 hours</option>
-        <option value="7" selected>Last 7 days</option>
-        <option value="30">Last 30 days</option>
+<section class="page" id="page-popular">
+  <div class="sectionhead"><h2>↗ Popular video ideas</h2></div>
+  <p class="muted small">Find promising documentary topics using public YouTube video data. Results are a sample of search results, not a complete ranking of all Shorts.</p>
+  <div class="panel">
+    <div class="field"><label for="popularQuery">DOCUMENTARY NICHE</label>
+      <select id="popularQuery">
+        <option value="Roblox history">Roblox history</option>
+        <option value="old Roblox 2006 2007">Old Roblox (2006–2007)</option>
+        <option value="Roblox Tix removed">Roblox Tix</option>
+        <option value="Roblox removed features">Removed Roblox features</option>
+        <option value="Roblox classic games nostalgia">Classic Roblox games</option>
+        <option value="what if Roblox">What if Roblox…?</option>
+        <option value="Roblox mysteries explained">Roblox mysteries</option>
+        <option value="Roblox secrets documentary">Roblox secrets</option>
       </select>
-      <button class="btn primary full" id="searchBtn" onclick="liveSearch()">🔥 Search YouTube</button>
-      <p class="muted small">Searches recent videos, not verified Shorts-only trends.
-      Never put your API key into the HTML source.</p>
     </div>
-    <div id="liveResults"></div>
-  </section>
+    <div class="row">
+      <div class="field"><label for="popularPeriod">UPLOAD PERIOD</label>
+        <select id="popularPeriod"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="field"><label for="popularOrder">SORT BY</label>
+        <select id="popularOrder"><option value="velocity">Views per day</option><option value="views">Total views</option></select>
+      </div>
+    </div>
+    <button class="btn primary full" id="popularBtn" onclick="popularSearch()">Find popular topics</button>
+    <p class="note">Uses YouTube's public search and statistics APIs. Search results may include videos that are not Shorts. Views per day is only a rough comparison, not proof a video is going viral.</p>
+  </div>
+  <div id="popularResults"></div>
+</section>
 
-  <section id="savedSection" class="hidden">
-    <h2>♡ Your saved ideas</h2>
-    <div id="savedList"></div>
-  </section>
+<section class="page" id="page-live">
+  <div class="sectionhead"><h2>◉ Live YouTube search</h2></div>
+  <p class="muted small">Search recent Roblox videos and inspect real public statistics.</p>
+  <div class="panel">
+    <div class="field"><label for="apiKey">YOUTUBE API KEY</label><input id="apiKey" type="password" autocomplete="off" placeholder="Paste your restricted API key"></div>
+    <button class="btn outline full" onclick="saveKey()">Save key on this device</button>
+    <div class="field"><label for="searchTerm">SEARCH TOPIC</label><input id="searchTerm" value="Roblox history"></div>
+    <div class="field"><label for="period">UPLOADED WITHIN</label>
+      <select id="period"><option value="1">24 hours</option><option value="7" selected>7 days</option><option value="30">30 days</option><option value="90">90 days</option></select>
+    </div>
+    <button class="btn primary full" id="searchBtn" onclick="liveSearch()">Search YouTube</button>
+    <p class="note">Your key is saved in this browser on this device. A browser-side API key is not secret; restrict it to your GitHub Pages referrer and YouTube Data API v3.</p>
+  </div>
+  <div id="liveResults"></div>
+</section>
 
-  <section class="panel">
-    <h2>✍️ Script builder</h2>
-    <p class="muted small">Choose an idea to create a structured script.</p>
-    <label for="scriptTopic">VIDEO TOPIC</label>
-    <input id="scriptTopic" placeholder="e.g. Roblox error codes">
-    <label for="scriptHook">OPENING HOOK</label>
-    <input id="scriptHook" placeholder="IMAGINE OPENING ROBLOX...">
+<section class="page" id="page-script">
+  <div class="sectionhead"><h2>✎ Script studio</h2></div>
+  <p class="muted small">Create a 30–40 second documentary outline with a delayed reveal.</p>
+  <div class="panel">
+    <div class="field"><label for="scriptTopic">VIDEO TOPIC</label><input id="scriptTopic" placeholder="e.g. What if Roblox never removed Tix?"></div>
+    <div class="field"><label for="scriptHook">OPENING HOOK</label><input id="scriptHook" placeholder="WHAT IF ROBLOX NEVER REMOVED TIX?!"></div>
+    <div class="field"><label for="scriptFacts">VERIFIED FACTS / NOTES (OPTIONAL)</label><textarea id="scriptFacts" placeholder="Add the facts and sources you checked."></textarea></div>
     <button class="btn primary full" onclick="buildScript()">Build my script</button>
-    <label for="scriptOutput">YOUR SCRIPT</label>
-    <textarea id="scriptOutput" placeholder="Your script will appear here..."></textarea>
-    <button class="btn secondary full" onclick="copyScript()">Copy script</button>
-  </section>
+    <div class="field"><label for="scriptOutput">SCRIPT</label><textarea id="scriptOutput" style="min-height:280px" placeholder="Your script will appear here..."></textarea></div>
+    <button class="btn outline full" onclick="copyScript()">Copy script</button>
+  </div>
+</section>
 
-  <p id="notice" class="notice" aria-live="polite"></p>
-</main>
+<section class="page" id="page-saved">
+  <div class="sectionhead"><h2>♡ Saved ideas</h2><button class="btn outline" onclick="clearSaved()">Clear all</button></div>
+  <div class="grid" id="savedList"></div>
+</section>
 
-<footer>
-SHORTSBOOST · FREE CREATOR TOOL<br><br>
-Scores are estimates. Verify news and Roblox claims before publishing.
-</footer>
+<p id="notice" class="note" role="status" aria-live="polite"></p>
+</div>
+
+<aside class="rightpanel">
+  <div class="panel">
+    <div class="panelhead"><h3><span class="live-dot"></span>Live view</h3><span class="tag">YOUTUBE</span></div>
+    <p class="muted small">Your latest research results appear here.</p>
+    <div class="divider"></div>
+    <div class="field"><label for="quickQuery">QUICK SEARCH</label>
+      <select id="quickQuery">
+        <option value="Roblox history">Roblox history</option>
+        <option value="Roblox Tix">Roblox Tix</option>
+        <option value="old Roblox games">Old Roblox games</option>
+        <option value="Roblox removed features">Removed features</option>
+        <option value="what if Roblox">What if Roblox…?</option>
+        <option value="Roblox mysteries">Roblox mysteries</option>
+      </select>
+    </div>
+    <button class="btn primary full" onclick="quickSearch()">Search this topic</button>
+    <div id="quickResults"><div class="empty">Run a search to see recent videos and view statistics here.</div></div>
+  </div>
+  <div class="panel">
+    <div class="panelhead"><h3>Creator checklist</h3></div>
+    <p class="muted small">Before recording your next Short:</p>
+    <p class="small">✓ Hook viewers in the first 2 seconds</p>
+    <p class="small">✓ Use real footage or screenshots</p>
+    <p class="small">✓ Verify dates and historical claims</p>
+    <p class="small">✓ Build suspense before the reveal</p>
+    <p class="small">✓ Finish with a strong question</p>
+  </div>
+  <div class="panel">
+    <h3>Research reminder</h3>
+    <p class="muted small">A high-view video is a clue, not a guarantee. Find your own angle, check the facts, and don't copy another creator's script.</p>
+  </div>
+</aside>
+</div>
+<footer>SHORTSBOOST · CUHDYY CREATOR STUDIO · Free tool, no guaranteed viral results.</footer>
+</div>
+</div>
 
 <script>
 "use strict";
-
-const $ = id => document.getElementById(id);
-const today = new Date();
-const dateKey = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+today.getDate();
-
-$("edition").textContent = "DAILY EDITION · "+today.toLocaleDateString(
-  undefined,{weekday:"long",month:"long",day:"numeric"}
-);
-
-const library = [
-{cat:"nostalgia",tag:"NOSTALGIA",title:"Roblox games everyone forgot",
-hook:"THESE ROBLOX GAMES USED TO BE EVERYWHERE… 💀",
-plan:"Compare old gameplay with what players see today.",
-reveal:"Finish with a forgotten game and show real footage.",
-ending:"WHICH OLD ROBLOX GAME DO YOU MISS MOST?"},
-{cat:"mystery",tag:"MYSTERY",title:"The scariest Roblox error messages",
-hook:"IMAGINE OPENING ROBLOX… AND SEEING THIS 💀",
-plan:"Show a real error message, try to reconnect, then build suspense.",
-reveal:"Explain what the error actually means using reliable sources.",
-ending:"HAVE YOU EVER SEEN THIS ERROR?"},
-{cat:"drama",tag:"CONTROVERSY",title:"Why Roblox players still debate this change",
-hook:"ROBLOX PLAYERS STILL ARGUE ABOUT THIS… 😭",
-plan:"Show the old feature, explain what changed, then show both sides.",
-reveal:"Save the most surprising consequence for the final section.",
-ending:"WAS THIS CHANGE GOOD OR BAD?"},
+const $=id=>document.getElementById(id);
+const titles={
+ dashboard:"Creator dashboard",ideas:"Documentary idea generator",
+ popular:"Popular video ideas",live:"Live YouTube search",
+ script:"Script studio",saved:"Saved ideas"
+};
+let currentPage="dashboard",lastVideos=[],lastPopular=[];
+const ideas=[
+{cat:"history",tag:"ROBLOX HISTORY",title:"How did Roblox look in 2006?",
+hook:"ROBLOX IN 2006 LOOKED NOTHING LIKE THIS…",
+plan:"Compare the original site, avatars and games using real historical images.",
+ending:"WOULD YOU HAVE PLAYED ROBLOX BACK THEN?"},
 {cat:"whatif",tag:"WHAT IF",title:"What if Roblox never removed Tix?",
-hook:"WHAT IF ROBLOX NEVER REMOVED TIX?! 💀",
-plan:"Start with the dream of earning free currency, then introduce a twist.",
-reveal:"Discuss bots, game economies and possible business consequences.",
+hook:"WHAT IF ROBLOX NEVER REMOVED TIX?!",
+plan:"Start with earning free currency, then explore how bots and the economy might change.",
 ending:"WOULD YOU BRING TIX BACK?"},
-{cat:"updates",tag:"UPDATE",title:"A new Roblox event worth checking",
-hook:"DON'T MISS WHAT'S HAPPENING IN ROBLOX… 👀",
-plan:"Find a current event, show the reward and demonstrate the steps.",
-reveal:"Keep the rarest or most interesting confirmed reward until later.",
-ending:"WHICH REWARD WOULD YOU GET FIRST?"},
-{cat:"mystery",tag:"SECRETS",title:"Three hidden details in a Roblox game",
-hook:"YOU PROBABLY MISSED THESE 3 ROBLOX DETAILS…",
-plan:"Show three genuine details, starting with the easiest to miss.",
-reveal:"Save the most surprising verified detail for number one.",
-ending:"DID YOU KNOW ANY OF THESE?"},
-{cat:"nostalgia",tag:"OLD ROBLOX",title:"How Roblox looked years ago",
-hook:"ROBLOX USED TO LOOK NOTHING LIKE THIS… 🥹",
-plan:"Compare real older footage, sounds and interfaces with today's Roblox.",
-reveal:"Show a specific old feature that younger players may not know.",
-ending:"OLD ROBLOX OR NEW ROBLOX?"},
-{cat:"whatif",tag:"WHAT IF",title:"What if Roblox shut down for a day?",
-hook:"IMAGINE ROBLOX DISAPPEARED FOR 24 HOURS… 💀",
-plan:"Show players trying to log in and imagine the impact on games.",
-reveal:"Separate the hypothetical story from real Roblox outage facts.",
-ending:"WHAT WOULD YOU PLAY INSTEAD?"},
-{cat:"drama",tag:"DEBATE",title:"A Roblox feature players want back",
-hook:"WHY DO PLAYERS KEEP ASKING FOR THIS BACK?!",
-plan:"Introduce the feature, show its old purpose and explain why people miss it.",
-reveal:"Compare the old experience with the current alternative.",
-ending:"SHOULD ROBLOX BRING IT BACK?"},
-{cat:"mystery",tag:"EXPLAINED",title:"A Roblox rumour that needs checking",
-hook:"EVERYONE IS SAYING THIS ABOUT ROBLOX… BUT IS IT TRUE?",
-plan:"Introduce the rumour and show what people believe.",
-reveal:"Check official sources and explain what is actually confirmed.",
-ending:"HAVE YOU HEARD THIS RUMOUR BEFORE?"},
-{cat:"nostalgia",tag:"HISTORY",title:"The oldest playable Roblox experiences",
+{cat:"removed",tag:"REMOVED FEATURES",title:"Why did Roblox remove Guests?",
+hook:"REMEMBER WHEN YOU COULD PLAY ROBLOX WITHOUT AN ACCOUNT?",
+plan:"Explain what Guest accounts were and why players remember them.",
+ending:"SHOULD GUESTS RETURN?"},
+{cat:"games",tag:"FORGOTTEN GAMES",title:"The oldest Roblox games still playable",
 hook:"WHAT IS THE OLDEST ROBLOX GAME YOU CAN STILL PLAY?",
-plan:"Show candidates with their original dates and surviving gameplay.",
-reveal:"Verify dates and distinguish original release dates from updates.",
-ending:"WOULD YOU PLAY THIS CLASSIC TODAY?"},
-{cat:"whatif",tag:"CHALLENGE",title:"Can you recognise an old Roblox game?",
-hook:"ONLY OG ROBLOX PLAYERS WILL RECOGNISE THIS… 👀",
-plan:"Show a genuine screenshot or cropped scene and invite guesses.",
-reveal:"Reveal the game name and show a little gameplay.",
-ending:"DID YOU GET IT RIGHT?"}
+plan:"Compare candidate games and verify their original release dates.",
+ending:"WHICH CLASSIC GAME SHOULD I TRY NEXT?"},
+{cat:"history",tag:"OLD ROBLOX",title:"What was Roblox like in 2012?",
+hook:"ROBLOX PLAYERS IN 2012 HAD A COMPLETELY DIFFERENT EXPERIENCE…",
+plan:"Show the old interface, avatar styles, sounds and popular games.",
+ending:"OLD ROBLOX OR NEW ROBLOX?"},
+{cat:"whatif",tag:"ALTERNATE TIMELINE",title:"What if Roblox never added Robux?",
+hook:"IMAGINE ROBLOX WITHOUT ROBUX…",
+plan:"Explore hypothetical purchases, avatar items and creator earnings.",
+ending:"HOW WOULD ROBLOX WORK TODAY?"},
+{cat:"removed",tag:"LOST FEATURES",title:"Roblox features newer players never used",
+hook:"NEW ROBLOX PLAYERS HAVE NEVER SEEN THESE FEATURES…",
+plan:"Choose real removed features and explain how each worked.",
+ending:"WHICH FEATURE DO YOU MISS?"},
+{cat:"mystery",tag:"MYSTERY",title:"The truth behind a strange Roblox error",
+hook:"THIS ROBLOX ERROR LOOKS TERRIFYING… BUT WHAT DOES IT MEAN?",
+plan:"Show the real error, build suspense and verify the actual explanation.",
+ending:"HAVE YOU EVER SEEN THIS ERROR?"},
+{cat:"mystery",tag:"ROBLOX RUMOURS",title:"A Roblox myth players used to believe",
+hook:"ROBLOX PLAYERS USED TO BELIEVE THIS…",
+plan:"Explain the rumour, show where it came from and check the evidence.",
+ending:"DID YOU BELIEVE IT TOO?"},
+{cat:"history",tag:"ROBLOX HISTORY",title:"How the Roblox avatar changed over time",
+hook:"ROBLOX AVATARS HAVE CHANGED A LOT…",
+plan:"Compare documented avatar styles and the features that changed.",
+ending:"WHICH ERA HAD THE BEST AVATARS?"},
+{cat:"games",tag:"CLASSIC ROBLOX",title:"The forgotten game that shaped Roblox",
+hook:"PEOPLE FORGOT HOW IMPORTANT THIS ROBLOX GAME WAS…",
+plan:"Find a well-documented game, show gameplay and explain its influence.",
+ending:"DID YOU EVER PLAY IT?"},
+{cat:"whatif",tag:"WHAT IF",title:"What if Roblox brought back old features?",
+hook:"IMAGINE IF ROBLOX BROUGHT ALL THESE FEATURES BACK…",
+plan:"Explore how classic features might fit into today's platform.",
+ending:"WHICH ONE SHOULD RETURN FIRST?"}
 ];
-
-let currentIdeas = [];
-let liveVideos = [];
-
-function hash(s){
-  let h=2166136261;
-  for(let i=0;i<s.length;i++) h=Math.imul(h^s.charCodeAt(i),16777619);
-  return h>>>0;
+function note(t,err=false){$("notice").textContent=t;$("notice").className="note"+(err?" error":"")}
+function go(page){
+ currentPage=page;
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ $("page-"+page).classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+ $("pageTitle").textContent=titles[page]||"ShortsBoost";
+ if(page==="saved")renderSaved();
+ if(page==="ideas")renderIdeaPage();
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-function savedItems(){
-  try{return JSON.parse(localStorage.getItem("sb_cuhdyy_saved")||"[]")}
-  catch(e){return []}
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+function getSaved(){
+ try{return JSON.parse(localStorage.getItem("sb_saved_v2")||"[]")}catch(e){return []}
 }
-function storeSaved(a){
-  try{localStorage.setItem("sb_cuhdyy_saved",JSON.stringify(a));return true}
-  catch(e){$("notice").textContent="Saving isn't available in this browser.";return false}
+function setSaved(arr){
+ try{localStorage.setItem("sb_saved_v2",JSON.stringify(arr));updateCounts();return true}
+ catch(e){note("Could not save on this device.",true);return false}
 }
 function updateCounts(){
-  $("savedCount").textContent=savedItems().length;
+ $("savedCount").textContent=getSaved().length;
+ $("ideaCount").textContent=ideas.length;
 }
-function newIdeas(){
-  const cat=$("category").value;
-  currentIdeas=library.filter(x=>cat==="all"||x.cat===cat)
-    .map(x=>({...x,score:65+hash(dateKey+x.title)%31}))
-    .sort((a,b)=>b.score-a.score);
-  $("ideaCount").textContent=currentIdeas.length;
-  renderIdeas(currentIdeas,$("ideasList"));
-  updateCounts();
+function cardFor(x,container,rank){
+ const card=document.createElement("article");card.className="card";
+ const tag=document.createElement("span");tag.className="tag";
+ tag.textContent=x.tag||(x.videoUrl?"REAL VIDEO RESULT":"IDEA");
+ const title=document.createElement("h3");title.textContent=(rank?rank+". ":"")+x.title;
+ const p=document.createElement("p");p.textContent=x.plan||x.why||"Research this topic and develop your own documentary angle.";
+ const actions=document.createElement("div");actions.className="cardactions";
+ const make=document.createElement("button");make.className="btn primary";make.textContent="Make script";
+ make.onclick=()=>{
+  $("scriptTopic").value=x.title;
+  $("scriptHook").value=x.hook||"YOU WON'T BELIEVE THIS ABOUT ROBLOX…";
+  go("script");buildScript();
+ };
+ const save=document.createElement("button");save.className="btn outline";
+ const isSaved=()=>getSaved().some(v=>v.title===x.title);
+ save.textContent=isSaved()?"♥ Saved":"♡ Save";
+ save.onclick=()=>{
+  let a=getSaved();
+  if(isSaved()){a=a.filter(v=>v.title!==x.title);note("Removed from saved ideas.")}
+  else{a.unshift({...x});note("Idea saved on this device.")}
+  setSaved(a);save.textContent=isSaved()?"♥ Saved":"♡ Save";
+ };
+ actions.append(make,save);
+ if(x.videoUrl){
+  const a=document.createElement("a");a.href=x.videoUrl;a.target="_blank";
+  a.rel="noopener noreferrer";a.textContent="Watch source ↗";actions.append(a);
+ }
+ card.append(tag,title,p);
+ if(x.viewsLabel){
+  const meta=document.createElement("p");meta.className="good";
+  meta.textContent=x.viewsLabel;card.append(meta);
+ }
+ card.append(actions);container.append(card);
 }
-function renderIdeas(items,container){
-  container.replaceChildren();
-  if(!items.length){
-    container.textContent="No ideas here yet. Generate some ideas first.";
-    return;
-  }
-  items.forEach((x,i)=>{
-    const card=document.createElement("article");
-    card.className="idea";
-    const top=document.createElement("div");
-    top.className="ideaTop";
-    const left=document.createElement("div");
-    const pill=document.createElement("span");
-    pill.className="pill";pill.textContent=x.tag||"LIVE VIDEO";
-    const title=document.createElement("h3");
-    title.textContent=(i+1)+". "+x.title;
-    left.append(pill,title);
-    const score=document.createElement("div");
-    score.className="score";score.textContent=x.score??"—";
-    top.append(left,score);
-    const hook=document.createElement("div");
-    hook.className="hook";hook.textContent=x.hook||x.title;
-    const desc=document.createElement("p");
-    desc.className="muted small";
-    desc.textContent=x.plan||x.why||"Research this topic and create your own take.";
-    const actions=document.createElement("div");
-    actions.className="actions";
-    const make=document.createElement("button");
-    make.className="btn primary";make.textContent="Make script";
-    make.onclick=()=>{
-      $("scriptTopic").value=x.title;
-      $("scriptHook").value=x.hook||x.title;
-      buildScript();
-      $("scriptTopic").scrollIntoView({behavior:"smooth",block:"center"});
-    };
-    const save=document.createElement("button");
-    save.className="btn secondary";
-    save.textContent=savedItems().some(v=>v.title===x.title)?"♥ Saved":"♡ Save";
-    save.onclick=()=>{
-      let arr=savedItems();
-      if(arr.some(v=>v.title===x.title)){
-        arr=arr.filter(v=>v.title!==x.title);
-        $("notice").textContent="Removed from saved ideas.";
-      }else{
-        arr.push({...x});
-        $("notice").textContent="Saved on this device.";
-      }
-      storeSaved(arr);updateCounts();
-      save.textContent=savedItems().some(v=>v.title===x.title)?"♥ Saved":"♡ Save";
-    };
-    actions.append(make,save);
-    if(x.videoUrl){
-      const link=document.createElement("a");
-      link.href=x.videoUrl;link.target="_blank";
-      link.rel="noopener noreferrer";link.textContent="Watch ↗";
-      link.style.color="#ffe000";
-      actions.append(link);
-    }
-    card.append(top,hook,desc,actions);
-    container.append(card);
-  });
+function renderIdeas(list,container){
+ container.replaceChildren();
+ if(!list.length){container.innerHTML='<div class="empty">No ideas found.</div>';return}
+ list.forEach((x,i)=>cardFor(x,container,i+1));
 }
-function switchTab(tab){
-  ["ideas","live","saved"].forEach(t=>{
-    $(t+"Section").classList.toggle("hidden",t!==tab);
-    document.querySelector('[data-tab="'+t+'"]').classList.toggle("active",t===tab);
-  });
-  if(tab==="saved") renderIdeas(savedItems(),$("savedList"));
+function renderIdeaPage(){
+ const cat=$("category").value;
+ const list=ideas.filter(x=>cat==="all"||x.cat===cat);
+ renderIdeas(list,$("ideasList"));
+}
+function renderSaved(){renderIdeas(getSaved(),$("savedList"))}
+function clearSaved(){
+ if(!confirm("Remove all saved ideas from this device?"))return;
+ setSaved([]);renderSaved();note("Saved ideas cleared.");
 }
 function buildScript(){
-  const topic=$("scriptTopic").value.trim()||"this Roblox mystery";
-  const hook=$("scriptHook").value.trim()||"YOU WON'T BELIEVE THIS ABOUT ROBLOX…";
-  const duration=Number($("length").value)||35;
-  const lines=[
-    "[0–3s] HOOK — "+hook,
-    "",
-    "[3–8s] SETUP — Show the Roblox gameplay or screenshot. Explain why this matters.",
-    "",
-    "[8–16s] BUILD SUSPENSE — Add two quick details, fast cuts and on-screen captions.",
-    "",
-    "[16–"+Math.round(duration*.75)+"s] TWIST — Introduce the most surprising verified fact about "+topic+".",
-    "",
-    "["+Math.round(duration*.75)+"–"+(duration-3)+"s] REVEAL — Explain what actually happened. Keep the visuals changing.",
-    "",
-    "["+(duration-3)+"–"+duration+"s] ENDING — "+(library.find(x=>x.title===topic)?.ending||"WHAT DO YOU THINK? COMMENT BELOW!")+" SUBSCRIBE FOR MORE ROBLOX SHORTS 💀"
-  ];
-  $("scriptOutput").value=lines.join("\n");
-  $("notice").textContent="Script outline created. Add verified details and your own voice before recording.";
+ const topic=$("scriptTopic").value.trim()||"this Roblox story";
+ const hook=$("scriptHook").value.trim()||"IMAGINE OPENING ROBLOX AND SEEING THIS…";
+ const duration=Number($("length")?.value||35);
+ const facts=$("scriptFacts").value.trim();
+ const ending=ideas.find(x=>x.title.toLowerCase()===topic.toLowerCase())?.ending||"WHAT DO YOU THINK? COMMENT BELOW!";
+ const reveal=Math.round(duration*.72),end=duration-3;
+ const text=[
+  `[0–3s] HOOK\n${hook}`,
+  `[3–8s] SETUP\nShow the most interesting screenshot or gameplay. Introduce ${topic} without explaining the whole story yet.`,
+  `[8–16s] BUILD SUSPENSE\nReveal two details quickly. Use captions, zooms and fast cuts. Ask a question the viewer wants answered.`,
+  `[16–${reveal}s] THE TWIST\nIntroduce the most surprising verified detail. Change the visual or sound to signal that something important is coming.`,
+  `[${reveal}–${end}s] REVEAL\nExplain what actually happened and why it matters. Keep the explanation clear and concise.`,
+  `[${end}–${duration}s] ENDING\n${ending}\nSUBSCRIBE FOR MORE ROBLOX DOCUMENTARIES 💙`,
+  facts?`\nRESEARCH NOTES — VERIFY BEFORE RECORDING\n${facts}`:"\nRESEARCH CHECK\nAdd verified dates, sources and specific facts before recording. Do not present speculation as confirmed history."
+ ].join("\n\n");
+ $("scriptOutput").value=text;
+ note("Script outline built. Add sourced facts and make the wording sound natural when spoken.");
 }
 async function copyScript(){
-  const value=$("scriptOutput").value;
-  if(!value){$("notice").textContent="Build a script first.";return}
-  try{
-    await navigator.clipboard.writeText(value);
-    $("notice").textContent="Script copied!";
-  }catch(e){
-    $("scriptOutput").focus();$("scriptOutput").select();
-    $("notice").textContent="Select and copy the script.";
-  }
+ const s=$("scriptOutput").value;if(!s){note("Build a script first.");return}
+ try{await navigator.clipboard.writeText(s);note("Script copied!")}
+ catch(e){$("scriptOutput").focus();$("scriptOutput").select();note("Select the text and copy it.")}
 }
 function saveKey(){
-  const key=$("apiKey").value.trim();
-  if(!key){$("notice").textContent="Paste your API key first.";return}
-  try{
-    localStorage.setItem("sb_youtube_key",key);
-    $("apiKey").value="";
-    $("notice").textContent="Key saved on this device.";
-  }catch(e){$("notice").textContent="Could not save the key."}
+ const k=$("apiKey").value.trim();
+ if(!k){note("Paste your API key first.",true);return}
+ try{localStorage.setItem("sb_yt_key",k);$("apiKey").value="";note("API key saved on this device.")}
+ catch(e){note("Could not save the key.",true)}
+}
+function getKey(){try{return localStorage.getItem("sb_yt_key")||""}catch(e){return ""}}
+async function youtubeSearch(query,days,order="viewCount"){
+ const key=getKey();if(!key)throw new Error("Go to Live Search and save your YouTube API key first.");
+ const params=new URLSearchParams({
+  part:"snippet",type:"video",q:query,order,
+  publishedAfter:new Date(Date.now()-days*86400000).toISOString(),
+  maxResults:"25",key
+ });
+ const r=await fetch("https://www.googleapis.com/youtube/v3/search?"+params);
+ const d=await r.json();
+ if(!r.ok)throw new Error(d.error?.message||"YouTube search failed.");
+ const items=(d.items||[]).filter(v=>v.id&&v.id.videoId);
+ if(!items.length)return [];
+ const ids=items.map(v=>v.id.videoId).join(",");
+ const sr=await fetch("https://www.googleapis.com/youtube/v3/videos?"+new URLSearchParams({part:"statistics",id:ids,key}));
+ const sd=await sr.json();
+ if(!sr.ok)throw new Error(sd.error?.message||"Could not retrieve video statistics.");
+ const stats={};(sd.items||[]).forEach(v=>stats[v.id]=v.statistics||{});
+ return items.map(v=>{
+  const id=v.id.videoId,st=stats[id]||{},views=Number(st.viewCount||0);
+  const published=Date.parse(v.snippet.publishedAt);
+  const age=Math.max(1,(Date.now()-published)/86400000);
+  const rate=Math.round(views/age);
+  return {
+   title:v.snippet.title,originalTitle:v.snippet.title,
+   videoUrl:"https://www.youtube.com/watch?v="+id,
+   published:v.snippet.publishedAt,views,rate,
+   viewsLabel:views.toLocaleString()+" total views · ~"+rate.toLocaleString()+" views/day",
+   why:"Published "+new Date(published).toLocaleDateString()+" · Channel: "+v.snippet.channelTitle,
+   tag:"YOUTUBE RESEARCH",hook:"DID YOU KNOW THIS ABOUT ROBLOX?",
+   plan:"Research this video's topic, verify the facts independently, and find a different documentary angle."
+  };
+ });
+}
+function drawResults(items,container,emptyText){
+ container.replaceChildren();
+ if(!items.length){container.innerHTML='<div class="empty">'+emptyText+'</div>';return}
+ items.forEach((v,i)=>{
+  const d=document.createElement("div");d.className="result";
+  const a=document.createElement("a");a.href=v.videoUrl;a.target="_blank";
+  a.rel="noopener noreferrer";a.textContent=(i+1)+". "+v.title;
+  const meta=document.createElement("div");meta.className="meta";
+  meta.textContent=v.views.toLocaleString()+" views · "+v.rate.toLocaleString()+" views/day · "+new Date(v.published).toLocaleDateString();
+  const use=document.createElement("button");use.className="btn soft";use.style.marginTop="8px";
+  use.textContent="Develop a topic";
+  use.onclick=()=>{
+   $("scriptTopic").value=makeTopic(v.title);
+   $("scriptHook").value="ROBLOX USED TO BE VERY DIFFERENT…";
+   $("scriptFacts").value="Research source: "+v.videoUrl+"\nOriginal video title: "+v.title+"\nVerify any claims with independent or official sources.";
+   go("script");buildScript();
+  };
+  d.append(a,meta,use);container.append(d);
+ });
+}
+function makeTopic(title){
+ let t=title.replace(/\s+/g," ").trim();
+ t=t.replace(/^\s*(roblox\s*[:|-]\s*)/i,"");
+ if(t.length>75)t=t.slice(0,72).trim()+"…";
+ return "Roblox documentary: "+t;
+}
+async function popularSearch(){
+ const btn=$("popularBtn");btn.disabled=true;btn.textContent="Researching…";
+ $("popularResults").replaceChildren();
+ try{
+  const q=$("popularQuery").value,days=Number($("popularPeriod").value)||30;
+  let items=await youtubeSearch(q,days,"viewCount");
+  if($("popularOrder").value==="views")items.sort((a,b)=>b.views-a.views);
+  else items.sort((a,b)=>b.rate-a.rate);
+  lastPopular=items;
+  if(!items.length){drawResults([], $("popularResults"),"No videos found in this period. Try another topic or longer period.");return}
+  const intro=document.createElement("div");intro.className="panel";
+  const h=document.createElement("h3");h.textContent="Top matching videos";
+  const p=document.createElement("p");p.className="note";
+  p.textContent="Ranked by "+($("popularOrder").value==="views"?"total views":"estimated views per day")+". These are recent search results, not a guaranteed viral ranking.";
+  intro.append(h,p);$("popularResults").append(intro);
+  drawResults(items,$("popularResults").appendChild(document.createElement("div")),"No results");
+  // Add matching video results as topic idea cards too.
+  const head=document.createElement("div");head.className="sectionhead";
+  const hh=document.createElement("h2");hh.textContent="Ideas to investigate";
+  head.append(hh);$("popularResults").append(head);
+  const grid=document.createElement("div");grid.className="grid";
+  items.slice(0,8).forEach((v,i)=>{
+   const x={...v,title:makeTopic(v.title),tag:"INSPIRED BY SEARCH",plan:"Source video: "+v.title+". Research the subject, verify the history, and create a new angle of your own."};
+   cardFor(x,grid,i+1);
+  });
+  $("popularResults").append(grid);
+  note("Loaded "+items.length+" videos. Compare results carefully; search results don't represent every YouTube Short.");
+  updateQuick(items);
+ }catch(e){$("popularResults").textContent="Search error: "+e.message;note("Check the API key, restrictions, quota and connection.",true)}
+ finally{btn.disabled=false;btn.textContent="Find popular topics"}
 }
 async function liveSearch(){
-  let key="";
-  try{key=localStorage.getItem("sb_youtube_key")||""}catch(e){}
-  if(!key){$("notice").textContent="Enter and save your YouTube API key first.";return}
-  const btn=$("searchBtn");
-  btn.disabled=true;btn.textContent="Searching...";
-  $("liveResults").replaceChildren();
-  $("notice").textContent="Searching YouTube...";
-  try{
-    const days=Number($("period").value)||7;
-    const params=new URLSearchParams({
-      part:"snippet",type:"video",order:"date",
-      q:$("searchTerm").value.trim()||"Roblox",
-      publishedAfter:new Date(Date.now()-days*86400000).toISOString(),
-      maxResults:"15",key
-    });
-    const res=await fetch("https://www.googleapis.com/youtube/v3/search?"+params);
-    const data=await res.json();
-    if(!res.ok)throw new Error(data.error?.message||"YouTube search failed.");
-    if(!data.items?.length){
-      $("liveResults").textContent="No videos found for that search period.";
-      return;
-    }
-    const ids=data.items.map(v=>v.id.videoId).filter(Boolean);
-    const statParams=new URLSearchParams({part:"statistics",id:ids.join(","),key});
-    const sr=await fetch("https://www.googleapis.com/youtube/v3/videos?"+statParams);
-    const sd=await sr.json();
-    if(!sr.ok)throw new Error(sd.error?.message||"Could not load video statistics.");
-    const stats={};
-    (sd.items||[]).forEach(v=>stats[v.id]=v.statistics||{});
-    liveVideos=data.items.filter(v=>v.id.videoId).map(v=>{
-      const st=stats[v.id.videoId]||{};
-      const views=Number(st.viewCount||0);
-      const age=Math.max(1,(Date.now()-Date.parse(v.snippet.publishedAt))/86400000);
-      const rate=views/age;
-      return {
-        title:v.snippet.title,hook:v.snippet.title,
-        tag:"RECENT VIDEO",score:Math.min(99,Math.round(45+Math.log10(rate+1)*12)),
-        why:views.toLocaleString()+" views · "+new Date(v.snippet.publishedAt).toLocaleDateString(),
-        videoUrl:"https://www.youtube.com/watch?v="+v.id.videoId
-      };
-    }).sort((a,b)=>b.score-a.score);
-    renderIdeas(liveVideos,$("liveResults"));
-    $("notice").textContent="Loaded "+liveVideos.length+" recent videos. The score is a rough views-per-day indicator, not proof of virality.";
-  }catch(e){
-    $("notice").textContent="Search error: "+e.message+
-      " Check the API key, restrictions, quota and internet connection.";
-  }finally{
-    btn.disabled=false;btn.textContent="🔥 Search YouTube";
-  }
+ const btn=$("searchBtn");btn.disabled=true;btn.textContent="Searching…";
+ $("liveResults").replaceChildren();
+ try{
+  const items=await youtubeSearch($("searchTerm").value.trim()||"Roblox history",Number($("period").value)||7,"date");
+  items.sort((a,b)=>b.rate-a.rate);lastVideos=items;
+  drawResults(items,$("liveResults"),"No videos found. Try a broader query or longer period.");
+  updateQuick(items);note("Loaded "+items.length+" videos, sorted by approximate views per day.");
+ }catch(e){$("liveResults").textContent="Search error: "+e.message;note("Check API key, referrer restrictions, quota and internet.",true)}
+ finally{btn.disabled=false;btn.textContent="Search YouTube"}
 }
-
-newIdeas();
-updateCounts();
+function updateQuick(items){
+ const box=$("quickResults");box.replaceChildren();
+ if(!items.length){box.innerHTML='<div class="empty">No results to show.</div>';return}
+ items.slice(0,5).forEach(v=>{
+  const d=document.createElement("div");d.className="result";
+  const a=document.createElement("a");a.href=v.videoUrl;a.target="_blank";a.rel="noopener noreferrer";a.textContent=v.title;
+  const m=document.createElement("div");m.className="meta";
+  m.textContent=v.views.toLocaleString()+" views · "+v.rate.toLocaleString()+"/day";
+  d.append(a,m);box.append(d);
+ });
+}
+async function quickSearch(){
+ $("searchTerm").value=$("quickQuery").value;
+ $("period").value="30";
+ go("live");await liveSearch();
+}
+function init(){
+ renderIdeaPage();
+ renderIdeas(ideas.slice(0,4),$("dashboardIdeas"));
+ updateCounts();
+}
+init();
 </script>
 </body>
 </html>
