@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b0b">
+<title>ShortsBoost — Daily Shorts Ideas</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#0b0b0b;--panel:#151515;--line:#292929;
+--yellow:#ffe000;--muted:#aaa;--white:#fff}
+body{margin:0;background:var(--bg);color:var(--white);
+font:15px Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{border-bottom:1px solid var(--line);padding:18px 16px}
+nav,.wrap{max-width:850px;margin:auto}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-size:23px;font-weight:900;color:var(--yellow)}
+.tag{color:var(--muted);font-size:12px;margin-top:5px}
+.wrap{padding:22px 15px 45px}
+h1{font-size:30px;line-height:1.15;margin:10px 0}
+h2{font-size:19px;margin:0 0 14px}
+p{line-height:1.5}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.panel{background:var(--panel);border:1px solid var(--line);
+border-radius:15px;padding:16px;margin:17px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.field{flex:1;min-width:140px}
+label{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+input,select{width:100%;background:#202020;color:white;
+border:1px solid #383838;border-radius:9px;padding:12px}
+.primary{background:var(--yellow);color:#111;border:0;
+border-radius:9px;padding:12px 15px;font-weight:800}
+.secondary{background:#222;color:white;border:1px solid #383838;
+border-radius:9px;padding:10px 12px}
+.full{width:100%;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.stat{background:#202020;border-radius:10px;padding:12px 8px}
+.stat strong{display:block;color:var(--yellow);font-size:20px}
+.stat span{font-size:11px;color:var(--muted)}
+.idea{background:var(--panel);border:1px solid var(--line);
+border-radius:14px;padding:15px;margin:12px 0}
+.ideaTop{display:flex;justify-content:space-between;gap:10px;
+align-items:start}
+.pill{font-size:11px;color:var(--yellow);background:#332f08;
+padding:6px 8px;border-radius:20px;white-space:nowrap}
+.score{font-weight:900;color:var(--yellow);font-size:21px}
+.hook{font-weight:800;font-size:18px;line-height:1.4;margin:13px 0}
+.idea p{font-size:13px;color:#ccc}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions button{flex:1}
+#notice{color:var(--yellow);min-height:18px;font-size:12px}
+footer{border-top:1px solid var(--line);padding:20px;
+text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:430px){
+h1{font-size:27px}.panel{padding:13px}
+.stats{gap:6px}.stat strong{font-size:18px}
+}
+</style>
+</head>
+<body>
+<header>
+<nav>
+  <div>
+    <div class="logo">⚡ SHORTSBOOST</div>
+    <div class="tag">YOUR DAILY SHORTS IDEA FINDER</div>
+  </div>
+  <button class="secondary" onclick="showSaved()">♡ Saved</button>
+</nav>
+</header>
+
+<main class="wrap">
+  <p class="muted small" id="today"></p>
+  <h1>Find your next <span style="color:#ffe000">viral</span> idea.</h1>
+  <p class="muted">Discover video ideas, build better hooks and plan
+  your next YouTube Short — for free.</p>
+
+  <div class="panel">
+    <h2>🎯 Find ideas</h2>
+    <div class="row">
+      <div class="field">
+        <label for="niche">YOUR NICHE</label>
+        <select id="niche">
+          <option value="roblox">Roblox</option>
+          <option value="gaming">Gaming</option>
+          <option value="general">YouTube Shorts (general)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="category">VIDEO TYPE</label>
+        <select id="category">
+          <option value="all">All topics</option>
+          <option value="nostalgia">Old Roblox / nostalgia</option>
+          <option value="mystery">Secrets and mysteries</option>
+          <option value="drama">Drama and controversy</option>
+          <option value="updates">Updates and events</option>
+          <option value="challenge">What if / challenges</option>
+        </select>
+      </div>
+    </div>
+    <button class="primary full" onclick="generate()">⚡ Find today's ideas</button>
+    <p class="muted small">Ideas are generated from a built-in topic library.
+    Live trend verification is not connected yet.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong id="total">0</strong><span>Ideas shown</span></div>
+    <div class="stat"><strong id="savedCount">0</strong><span>Saved ideas</span></div>
+    <div class="stat"><strong id="dateCount">1</strong><span>Daily edition</span></div>
+  </div>
+
+  <div style="margin-top:25px">
+    <h2 id="resultsTitle">🔥 Today's ideas</h2>
+    <p class="muted small">Scores estimate creative potential, not actual views.</p>
+    <div id="results"></div>
+    <p id="notice" aria-live="polite"></p>
+  </div>
+</main>
+
+<footer>SHORTSBOOST · Free creator tools · Made for creators</footer>
+
+<script>
+const library = [
+{cat:"nostalgia",title:"Roblox games that time forgot",
+hook:"THESE ROBLOX GAMES USED TO BE EVERYWHERE… 💀",
+why:"Use old screenshots, familiar sounds and a surprising final example.",
+format:"Nostalgia"},
+{cat:"mystery",title:"A Roblox mystery nobody talks about",
+hook:"THERE'S A ROBLOX MYSTERY THAT MAKES NO SENSE…",
+why:"Open with the strangest clue, then reveal the explanation at the end.",
+format:"Mystery"},
+{cat:"drama",title:"A controversial Roblox decision",
+hook:"ROBLOX PLAYERS STILL ARGUE ABOUT THIS… 😭",
+why:"Explain both sides fairly and finish with a question for viewers.",
+format:"Controversy"},
+{cat:"updates",title:"The latest Roblox event rewards",
+hook:"DON'T MISS THESE ROBLOX EVENT REWARDS…",
+why:"Verify the current event, rewards and requirements before posting.",
+format:"Update"},
+{cat:"challenge",title:"What if Roblox changed one big thing?",
+hook:"WHAT IF ROBLOX CHANGED THIS FOREVER? 💀",
+why:"Show the expected outcome, introduce a twist and explain the consequences.",
+format:"What if"},
+{cat:"mystery",title:"The weirdest Roblox error messages",
+hook:"IF YOU SEE THIS ROBLOX ERROR, HERE'S WHAT IT MEANS…",
+why:"Show the message, explain what causes it and distinguish facts from rumours.",
+format:"Explainer"},
+{cat:"nostalgia",title:"Roblox before it became what it is today",
+hook:"ROBLOX USED TO LOOK COMPLETELY DIFFERENT…",
+why:"Compare real old footage with today's experience.",
+format:"Nostalgia"},
+{cat:"drama",title:"A Roblox feature players want back",
+hook:"WHY DO SO MANY ROBLOX PLAYERS WANT THIS BACK?!",
+why:"Explain what changed and why people still care.",
+format:"Debate"},
+{cat:"challenge",title:"Can you recognise this Roblox game?",
+hook:"ONLY OG ROBLOX PLAYERS WILL RECOGNISE THIS… 👀",
+why:"Start with a blurred or cropped real screenshot and reveal it later.",
+format:"Challenge"},
+{cat:"updates",title:"A Roblox update explained quickly",
+hook:"THIS ROBLOX UPDATE CHANGES MORE THAN YOU THINK…",
+why:"Check official patch notes and show the most interesting confirmed change.",
+format:"Update"},
+{cat:"mystery",title:"Three hidden details in a Roblox game",
+hook:"YOU PROBABLY MISSED THESE 3 DETAILS…",
+why:"Use three real, verifiable details and save the best for last.",
+format:"Secrets"},
+{cat:"challenge",title:"What happens if you try the impossible?",
+hook:"I DIDN'T THINK THIS WAS POSSIBLE IN ROBLOX…",
+why:"Demonstrate a reproducible challenge and show the actual result.",
+format:"Challenge"}
+];
+
+const $ = id => document.getElementById(id);
+const today = new Date();
+const dateKey = today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+$("today").textContent = "YOUR EDITION · " + today.toLocaleDateString(undefined,{
+weekday:"long",month:"long",day:"numeric",year:"numeric"
+});
+
+function readSaved(){
+  try{return JSON.parse(localStorage.getItem("sb_saved")||"[]")}
+  catch(e){return []}
+}
+function writeSaved(items){
+  try{localStorage.setItem("sb_saved",JSON.stringify(items))}
+  catch(e){$("notice").textContent="Saving is unavailable in this browser."}
+}
+function hash(s){
+  let h=2166136261;
+  for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);
+  return h>>>0;
+}
+function dailyScore(item){
+  const h=hash(dateKey+item.title);
+  return 65+(h%31);
+}
+function getIdeas(){
+  const niche=$("niche").value;
+  const cat=$("category").value;
+  let items=library.filter(x=>cat==="all"||x.cat===cat);
+  if(niche==="gaming"){
+    items=items.map(x=>({...x,
+      title:x.title.replaceAll("Roblox","gaming"),
+      hook:x.hook.replaceAll("ROBLOX","GAMING")
+    }));
+  }
+  if(niche==="general"){
+    items=items.map(x=>({...x,
+      title:x.title.replaceAll("Roblox","your niche"),
+      hook:x.hook.replaceAll("ROBLOX","YOUR NICHE")
+    }));
+  }
+  return items.map(x=>({...x,score:dailyScore(x)}))
+    .sort((a,b)=>hash(dateKey+a.title)-hash(dateKey+b.title));
+}
+function render(items,title){
+  $("resultsTitle").textContent=title;
+  $("total").textContent=items.length;
+  $("savedCount").textContent=readSaved().length;
+  $("results").innerHTML="";
+  if(!items.length){
+    $("results").textContent="No saved ideas yet. Find some ideas and tap Save.";
+    return;
+  }
+  items.forEach((x,i)=>{
+    const key=x.title;
+    const saved=readSaved().some(s=>s.title===key);
+    const el=document.createElement("article");
+    el.className="idea";
+    const top=document.createElement("div");
+    top.className="ideaTop";
+    const left=document.createElement("div");
+    const tag=document.createElement("span");
+    tag.className="pill";
+    tag.textContent=x.format;
+    const name=document.createElement("h3");
+    name.textContent=(i+1)+". "+x.title;
+    name.style.margin="10px 0 0";
+    left.append(tag,name);
+    const score=document.createElement("span");
+    score.className="score";
+    score.textContent=x.score;
+    score.title="Estimated creative potential out of 100";
+    top.append(left,score);
+    const hook=document.createElement("div");
+    hook.className="hook";
+    hook.textContent=x.hook;
+    const why=document.createElement("p");
+    why.textContent="VIDEO PLAN: "+x.why;
+    const actions=document.createElement("div");
+    actions.className="actions";
+    const copy=document.createElement("button");
+    copy.className="primary";
+    copy.textContent="Copy hook";
+    copy.onclick=async()=>{
+      try{
+        await navigator.clipboard.writeText(x.hook);
+        $("notice").textContent="Hook copied!";
+      }catch(e){
+        const t=document.createElement("textarea");
+        t.value=x.hook;el.append(t);t.select();
+        document.execCommand("copy");t.remove();
+        $("notice").textContent="Hook copied!";
+      }
+    };
+    const save=document.createElement("button");
+    save.className="secondary";
+    save.textContent=saved?"♥ Saved":"♡ Save";
+    save.onclick=()=>{
+      let arr=readSaved();
+      if(arr.some(s=>s.title===key)){
+        arr=arr.filter(s=>s.title!==key);
+        $("notice").textContent="Removed from saved ideas.";
+      }else{
+        arr.push(x);
+        $("notice").textContent="Idea saved on this device.";
+      }
+      writeSaved(arr);
+      generate();
+    };
+    const search=document.createElement("button");
+    search.className="secondary";
+    search.textContent="Research ↗";
+    search.onclick=()=>window.open(
+      "https://www.youtube.com/results?search_query="+
+      encodeURIComponent(x.title)," _blank".trim(),"noopener");
+    actions.append(copy,save,search);
+    el.append(top,hook,why,actions);
+    $("results").append(el);
+  });
+}
+function generate(){
+  $("notice").textContent="";
+  render(getIdeas(),"🔥 Today's ideas");
+}
+function showSaved(){
+  $("notice").textContent="";
+  render(readSaved(),"♡ Your saved ideas");
+}
+$("niche").addEventListener("change",generate);
+$("category").addEventListener("change",generate);
+$("savedCount").textContent=readSaved().length;
+$("dateCount").textContent=(hash(dateKey)%30)+1;
+generate();
+</script>
+</body>
+</html>
